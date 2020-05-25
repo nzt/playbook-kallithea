@@ -4,7 +4,8 @@
 # Project: Playbook Kallithea
 
 - hosts: all
-  vars_file: vars.yaml
+  vars_files:
+    - vars.yaml
   become: yes
   roles:
     - apt
