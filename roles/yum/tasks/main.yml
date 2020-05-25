@@ -1,9 +1,9 @@
-- name: Install curl
-  yum:
-    name: curl
-    state: present
-- name: Add nodesource
-  shell: curl -fsSL https://rpm.nodesource.com/setup_12.x | bash -
+- name: Download nodesource installer
+  get_url: 
+    src: https://rpm.nodesource.com/setup_12.x
+    dest: /tmp/setup_12.x.bash
+- name: Install nodesource
+  command: bash /tmp/setup_12.x.bash
 - name: Install dependencies via yum
   yum:
     name:
@@ -12,6 +12,5 @@
       - git
       - libffi-devel
       - python3-devel
-      - python3-venv
       - nodejs
     state: present
