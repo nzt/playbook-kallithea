@@ -1,0 +1,22 @@
+# Copyright Holder: TANIGUCHI Masaya
+# Copyright Year: 2020
+# License: MIT
+# Project: Playbook Kallithea
+- name: Activate http
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - http
+    #- https
+- name: Create apache configuration
+  template:
+    src: kallithea.conf.j2
+    dest: /etc/httpd/conf.d/kallithea.conf
+    mode: 664
+- name: Enable apache
+  systemd:
+    name: httpd
+    enabled: yes
+    state: restarted

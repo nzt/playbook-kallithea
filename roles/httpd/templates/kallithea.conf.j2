@@ -1,0 +1,18 @@
+
+# Copyright Holder: TANIGUCHI Masaya
+# Copyright Year: 2020
+# License: MIT
+# Project: Playbook Kallithea
+<VirtualHost *:80>
+  ServerName {{ kallithea_server_name }}
+
+  <Proxy *>
+    Require all granted
+  </Proxy>
+
+  ProxyPreserveHost On
+  ProxyPass / http://127.0.0.1:5000/
+  ProxyPassReverse / http://127.0.0.1:5000/
+
+  #SetEnvIf X-Url-Scheme https HTTPS=1
+</VirtualHost>

@@ -1,0 +1,14 @@
+# Copyright Holder: TANIGUCHI Masaya
+# Copyright Year: 2020
+# License: MIT
+# Project: Playbook Kallithea
+- name: Create apache configuration
+  template:
+    src: kallithea.conf.j2
+    dest: /etc/apache2/conf.d/kallithea.conf
+    mode: 664
+- name: Enable apache
+  systemd:
+    name: apache2
+    enabled: yes
+    state: restarted

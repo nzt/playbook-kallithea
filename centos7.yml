@@ -1,0 +1,31 @@
+# Copyright Holder: TANIGUCHI Masaya
+# Copyright Year: 2020
+# License: MIT
+# Project: Playbook Kallithea
+
+- hosts: all
+  vars:
+    kallithea_root: /srv/kallithea
+    kallithea_user: admin
+    kallithea_password: 3WzeJftriWK4B2Zk
+    kallithea_email: admin@example.com
+    kallithea_repos: /srv/repos
+    kallithea_server_name: example.com
+  become: yes
+  tasks:
+    - name: Add nodesource
+      command: curl -fsSL https://rpm.nodesource.com/setup_12.x | bash -
+    - name: Install dependencies via yum
+      yum:
+        name:
+          - httpd
+          - gcc
+          - git
+          - libffi-devel
+          - python3-devel
+          - python3-venv
+          - nodejs
+        state: installed
+  roles:
+    - kallithea
+    - httpd

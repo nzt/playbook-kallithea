@@ -6,6 +6,7 @@ This is an ansible playbook example for Kallithea server admin.
 ## Tested environment
 
 - CentOS 7
+- Ubuntu 20.04
 
 ## Installation
 
@@ -14,7 +15,7 @@ $ git clone git://github.com/nzt/kallithea-playbook
 $ cd kallithea-playbook
 $ echo '127.0.0.1' > hosts
 $ vi playbook.yml # edit parameters
-$ ansible-playbook -i hosts playbook.yml
+$ ansible-playbook -i hosts centos7.yml # ubuntu20.yml
 ```
 
 ## Copyright & License
