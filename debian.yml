@@ -5,7 +5,7 @@
 
 - hosts: all
   vars_files:
-    - ./vars.yaml
+    - vars.yml
   become: yes
   roles:
     - apt

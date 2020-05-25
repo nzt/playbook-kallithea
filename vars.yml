@@ -1,3 +1,8 @@
+# Copyright Holder: TANIGUCHI Masaya
+# Copyright Year: 2020
+# License: MIT
+# Project: Playbook Kallithea
+
 kallithea_root: /srv/kallithea
 kallithea_user: admin
 kallithea_password: 3WzeJftriWK4B2Zk
