@@ -12,7 +12,7 @@ jobs:
         include:
           - os: centos
             playbook: centos.yml
-          - os: ubuntu20
+          - os: ubuntu
             playbook: debian.yml
     steps:
       - name: Checkout
