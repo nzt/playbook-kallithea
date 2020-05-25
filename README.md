@@ -15,7 +15,7 @@ $ git clone git://github.com/nzt/kallithea-playbook
 $ cd kallithea-playbook
 $ echo '127.0.0.1' > hosts
 $ vi playbook.yml # edit parameters
-$ ansible-playbook -i hosts centos7.yml # or ubuntu20.yml
+$ ansible-playbook -i hosts centos:7.yml # or ubuntu:20.04.yml
 ```
 
 ## Copyright & License

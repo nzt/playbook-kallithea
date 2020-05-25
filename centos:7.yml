@@ -12,20 +12,7 @@
     kallithea_repos: /srv/repos
     kallithea_server_name: example.com
   become: yes
-  tasks:
-    - name: Add nodesource
-      command: curl -fsSL https://rpm.nodesource.com/setup_12.x | bash -
-    - name: Install dependencies via yum
-      yum:
-        name:
-          - httpd
-          - gcc
-          - git
-          - libffi-devel
-          - python3-devel
-          - python3-venv
-          - nodejs
-        state: installed
   roles:
+    - yum
     - kallithea
     - httpd

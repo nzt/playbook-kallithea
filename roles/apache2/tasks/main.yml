@@ -5,8 +5,12 @@
 - name: Create apache configuration
   template:
     src: kallithea.conf.j2
-    dest: /etc/apache2/conf.d/kallithea.conf
+    dest: /etc/apache2/conf-available/kallithea.conf
     mode: 664
+- name: Enable apache modules
+  command: a2enmod proxy_http
+- name: Enable apache configuration
+  command: a2enconf kallithea
 - name: Enable apache
   systemd:
     name: apache2

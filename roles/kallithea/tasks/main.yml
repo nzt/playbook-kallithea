@@ -4,24 +4,24 @@
 # Project: Playbook Kallithea
 - name: Install kallithea
   pip: 
-    name: kallithea
+    name: 
+      - kallithea
     state: latest
     virtualenv: "{{ kallithea_root }}/.venv"
-    virtualenv_python: python3
-- name: Test kallithea.ini
-  stat:
-    path: "{{ kallithea_root }}/kallithea.ini"
-  register: "kallithea_ini"
+    virtualenv_command: python3 -m venv
+
 - name: Create configuration
   command: >
     {{ kallithea_root }}/.venv/bin/kallithea-cli config-create {{ kallithea_root }}/kallithea.ini
   args:
+    creates: "{{ kallithea_root }}/kallithea.ini"
     chdir: "{{ kallithea_root }}"
-  when: not kallithea_ini.stat.exists
-- name: Test kallithea.db
-  stat:
-    path: "{{ kallithea_root }}/kallithea.db"
-  register: "kallithea_db"
+
+- name: Create directory for repositories
+  file:
+    path: "{{ kallithea_repos }}"
+    state: directory
+
 - name: Create database
   command: >
     {{ kallithea_root }}/.venv/bin/kallithea-cli db-create -c {{ kallithea_root}}/kallithea.ini
@@ -29,21 +29,27 @@
       --password={{ kallithea_password }}
       --email={{ kallithea_email }}
       --repos={{ kallithea_repos }}
+      --force-yes
   args:
+    creates: "{{ kallithea_root }}/kallithea.db"
     chdir: "{{ kallithea_root }}"
-  when: not kallithea_db.stat.exists
+
 - name: Build front-end
-  command: >
+  shell: >
+    . {{ kallithea_root }}/.venv/bin/activate &&
     {{ kallithea_root }}/.venv/bin/kallithea-cli front-end-build
   args:
+    creates: "{{ kallithea_root }}/.venv/lib64/python3.8/site-packages/kallithea/front-end/node_modules"
     chdir: "{{ kallithea_root }}"
+
 - name: Create systemd configuration
   template:
     src: kallithea.service.j2
     dest: /etc/systemd/system/kallithea.service
     mode: 664
+
 - name: Enable kallithea
   systemd:
     name: kallithea
     enabled: yes
-    state: started
+    state: restarted

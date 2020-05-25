@@ -6,7 +6,7 @@
 Description=Kallithea is a GPLv3'd, Free Software source code management system.
 
 [Service]
-ExecStart={{ kallithea_root }}/.venv/bin/gearbox serve -c {{ kallithea_root }}/my.ini
+ExecStart={{ kallithea_root }}/.venv/bin/gearbox serve -c {{ kallithea_root }}/kallithea.ini
 WorkingDirectory={{ kallithea_root }}
 
 [Install]

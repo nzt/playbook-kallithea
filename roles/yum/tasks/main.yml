@@ -1,0 +1,13 @@
+- name: Add nodesource
+  command: curl -fsSL https://rpm.nodesource.com/setup_12.x | bash -
+- name: Install dependencies via yum
+  yum:
+    name:
+      - httpd
+      - gcc
+      - git
+      - libffi-devel
+      - python3-devel
+      - python3-venv
+      - nodejs
+    state: present

@@ -3,11 +3,13 @@
 # Copyright Year: 2020
 # License: MIT
 # Project: Playbook Kallithea
+
 <VirtualHost *:80>
   ServerName {{ kallithea_server_name }}
 
   <Proxy *>
-    Require all granted
+    Order allow,deny
+    Allow from all
   </Proxy>
 
   ProxyPreserveHost On

@@ -1,0 +1,19 @@
+name: Ansible Playbook
+on: push
+strategy:
+  matrix:
+    os: [ubuntu:20.04, centos:7]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Docker run ${{ matrix.os }}
+        env:
+          DOCKER_REGISTRY_URL: https://hub.docker.com/
+        run: sudo docker run -d -t --name=container ${{ matrix.os }}
+
+      - name: ansible
+        run: ansible-playbook -i 'container,' -c docker -u root ${{ matrix.os }}.yml
