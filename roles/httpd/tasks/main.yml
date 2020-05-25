@@ -2,21 +2,18 @@
 # Copyright Year: 2020
 # License: MIT
 # Project: Playbook Kallithea
-- name: Activate http
-  firewalld:
-    service: "{{ item }}"
-    permanent: yes
-    state: enabled
-  with_items:
-    - http
-    #- https
 - name: Create apache configuration
   template:
     src: kallithea.conf.j2
     dest: /etc/httpd/conf.d/kallithea.conf
     mode: 664
-- name: Enable apache
+- name: Restart apache
   systemd:
     name: httpd
     enabled: yes
     state: restarted
+- name: Update SELinux
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes

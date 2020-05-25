@@ -38,7 +38,6 @@
     . {{ kallithea_root }}/.venv/bin/activate &&
     {{ kallithea_root }}/.venv/bin/kallithea-cli front-end-build
   args:
-    creates: "{{ kallithea_root }}/.venv/lib64/python3.8/site-packages/kallithea/front-end/node_modules"
     chdir: "{{ kallithea_root }}"
 
 - name: Create systemd configuration
