@@ -4,8 +4,7 @@
 # Project: Playbook Kallithea
 - name: Install kallithea
   pip: 
-    name: 
-      - kallithea
+    name: kallithea
     state: latest
     virtualenv: "{{ kallithea_root }}/.venv"
     virtualenv_command: python3 -m venv
@@ -16,6 +15,9 @@
   args:
     creates: "{{ kallithea_root }}/kallithea.ini"
     chdir: "{{ kallithea_root }}"
+  environment:
+    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
 
 - name: Create directory for repositories
   file:
@@ -33,6 +35,9 @@
   args:
     creates: "{{ kallithea_root }}/kallithea.db"
     chdir: "{{ kallithea_root }}"
+  environment:
+    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
 
 - name: Build front-end
   shell: >
@@ -41,6 +46,9 @@
   args:
     creates: "{{ kallithea_root }}/.venv/lib64/python3.8/site-packages/kallithea/front-end/node_modules"
     chdir: "{{ kallithea_root }}"
+  environment:
+    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
 
 - name: Create systemd configuration
   template:
