@@ -8,9 +8,7 @@ jobs:
       matrix:
         os:
           - centos7
-          - centos8
           - debian10
-          - ubuntu20
         include:
           - os: centos7
             PLAYBOOK: centos.yml
