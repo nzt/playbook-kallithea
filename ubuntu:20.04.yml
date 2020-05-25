@@ -3,8 +3,7 @@
 # License: MIT
 # Project: Playbook Kallithea
 
-- hosts: localhost
-  connection: local
+- hosts: all
   vars:
     kallithea_root: /srv/kallithea
     kallithea_user: admin
