@@ -6,7 +6,7 @@ This is an ansible playbook example for Kallithea server administrators.
 ## Tested environment
 
 - CentOS 7
-- Debian 10
+- Ubuntu 20.04
 
 ## Installation
 
