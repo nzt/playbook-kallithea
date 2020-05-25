@@ -3,7 +3,7 @@
     name: curl
     state: present
 - name: Add nodesource
-  command: curl -fsSL https://rpm.nodesource.com/setup_12.x | bash -
+  shell: curl -fsSL https://rpm.nodesource.com/setup_12.x | bash -
 - name: Install dependencies via yum
   yum:
     name:
