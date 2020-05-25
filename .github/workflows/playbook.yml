@@ -2,7 +2,9 @@ name: Ansible Playbook
 on: push
 strategy:
   matrix:
-    os: "[ubuntu:20.04, centos:7]"
+    os:
+      - "ubuntu:20.04"
+      - "centos:7"
 jobs:
   deploy:
     runs-on: ubuntu-latest
