@@ -12,5 +12,6 @@
       - git
       - libffi-devel
       - python3-devel
+      - python-setuptools
       - nodejs
     state: present
