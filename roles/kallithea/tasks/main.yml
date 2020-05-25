@@ -51,4 +51,4 @@
   systemd:
     name: kallithea
     enabled: yes
-    state: restarted
+    state: started
