@@ -14,7 +14,7 @@ This is an ansible playbook example for Kallithea server administrators.
 $ git clone git://github.com/nzt/playbook-kallithea
 $ cd playbook-kallithea
 $ echo '127.0.0.1' > hosts
-$ vi playbook.yml # edit parameters
+$ vi vars.yml # edit parameters
 $ ansible-playbook -i hosts centos.yml # or debian.yml
 ```
 

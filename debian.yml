@@ -4,13 +4,7 @@
 # Project: Playbook Kallithea
 
 - hosts: all
-  vars:
-    kallithea_root: /srv/kallithea
-    kallithea_user: admin
-    kallithea_password: 3WzeJftriWK4B2Zk
-    kallithea_email: admin@example.com
-    kallithea_repos: /srv/repos
-    kallithea_server_name: example.com
+  vars_file: vars.yaml
   become: yes
   roles:
     - apt

@@ -7,23 +7,23 @@ jobs:
     strategy:
       matrix:
         os:
-          - centos7
-          - debian10
+          - centos
+          - ubuntu
         include:
-          - os: centos7
-            PLAYBOOK: centos.yml
-            IMAGE: centos:7
-          - os: debian10
-            PLAYBOOK: debian.yml
-            IMAGE: python:buster
+          - os: centos
+            playbook: centos.yml
+          - os: ubuntu20
+            playbook: debian.yml
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Docker run ${{ matrix.IMAGE }}
+      - name: Docker run ${{ matrix.os }}
         env:
           DOCKER_REGISTRY_URL: https://hub.docker.com/
-        run: sudo docker run -d -t --name=container ${{ matrix.IMAGE }}
+        run: |
+          sudo docker build . -f .github/workflows/${{ matrix.os }}.Dockerfile -t ${{ matrix.os }}
+          sudo docker run -d -t --name=container ${{ matrix.os }}
 
       - name: ansible
-        run: ansible-playbook -i 'container,' -c docker -u root ${{ matrix.PLAYBOOK }}
+        run: ansible-playbook -i 'container,' -c docker -u root ${{ matrix.playbook }}
